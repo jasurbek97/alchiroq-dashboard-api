@@ -9,8 +9,6 @@ const PORT: number = +process.env.PORT || 5000;
 const MONGO_HOST: string = process.env.MONGO_HOST || '';
 const MONGO_PORT: number = +process.env.MONGO_PORT || 27017;
 const MONGO_DATABASE: string = process.env.MONGO_DATABASE || '';
-const MONGO_USERNAME: string = process.env.MONGO_USERNAME || '';
-const MONGO_PASSWORD: string = process.env.MONGO_PASSWORD || '';
 
 const THROTTLER: number = +process.env.THROTTLER || 60;
 const THROTTLER_LIMIT: number = +process.env.THROTTLER_LIMIT || 10;
@@ -24,8 +22,6 @@ export {
   MONGO_HOST,
   MONGO_PORT,
   MONGO_DATABASE,
-  MONGO_USERNAME,
-  MONGO_PASSWORD,
   NODE_ENV,
   PORT,
 };
