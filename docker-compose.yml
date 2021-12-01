@@ -2,9 +2,28 @@ version: "3"
 
 services:
   mongodb:
-    container_name: mongo
+    container_name: ${APP_NAME}-mongo
     image: mongo:latest
     environment:
-      - MONGODB_DATABASE=${MONGODB_DATABASE}
+      - MONGO_INITDB_DATABASE=${MONGO_DATABASE}
     ports:
-      - "27017:27017"
+      - ${MONGO_PORT}:27017
+    volumes:
+      - ./mongodb:/data/db
+
+  app:
+    container_name: ${APP_NAME}-app
+    image: ${APP_NAME}:${APP_VERSION}
+    build:
+      context: .
+      target: production
+      dockerfile: ./Dockerfile
+    depends_on:
+      - mongodb
+    command: npm run start:prod
+    ports:
+      - ${PORT}:3000
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always

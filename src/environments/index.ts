@@ -6,8 +6,11 @@ const TIMEZONE: string = process.env.TIMEZONE || 'Asia/Tashkent';
 const NODE_ENV: string = process.env.NODE_ENV || 'dev';
 const PORT: number = +process.env.PORT || 5000;
 
-const MONGO_DOC_URL: string = process.env.MONGO_DOC_URL || '';
-const MONGO_DOC_CON: string = process.env.MONGO_DOC_CON || '';
+const MONGO_HOST: string = process.env.MONGO_HOST || '';
+const MONGO_PORT: number = +process.env.MONGO_PORT || 27017;
+const MONGO_DATABASE: string = process.env.MONGO_DATABASE || '';
+const MONGO_USERNAME: string = process.env.MONGO_USERNAME || '';
+const MONGO_PASSWORD: string = process.env.MONGO_PASSWORD || '';
 
 const THROTTLER: number = +process.env.THROTTLER || 60;
 const THROTTLER_LIMIT: number = +process.env.THROTTLER_LIMIT || 10;
@@ -18,8 +21,11 @@ export {
   TIMEZONE,
   THROTTLER,
   THROTTLER_LIMIT,
-  MONGO_DOC_URL,
-  MONGO_DOC_CON,
+  MONGO_HOST,
+  MONGO_PORT,
+  MONGO_DATABASE,
+  MONGO_USERNAME,
+  MONGO_PASSWORD,
   NODE_ENV,
   PORT,
 };
