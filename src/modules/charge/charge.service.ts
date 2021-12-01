@@ -42,6 +42,13 @@ export class ChargeService {
     };
   }
 
+  async findByTariffToday(tariff: string): Promise<Charge[]> {
+    return await this.chargeModel
+      .find({ tariff: tariff, date: formatDate(new Date()) })
+      .select('status count')
+      .exec();
+  }
+
   async cache(dates: string[], sign = '=') {
     const charges = await getRepository(ChargeEntity)
       .createQueryBuilder('ch')

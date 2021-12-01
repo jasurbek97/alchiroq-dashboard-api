@@ -21,6 +21,17 @@ export class ChargeController {
     type: 'string',
     enum: TariffEnum,
   })
+  @Get('/today/:tariff')
+  findByTariffToday(@Param('tariff') tariff: string) {
+    return this.chargeService.findByTariffToday(tariff);
+  }
+
+  @ApiOperation({ summary: 'Get all charges 🟢' })
+  @ApiParam({
+    name: 'tariff',
+    type: 'string',
+    enum: TariffEnum,
+  })
   @Get('/:tariff')
   findByTariff(@Param('tariff') tariff: string) {
     return this.chargeService.findByTariff(tariff);
