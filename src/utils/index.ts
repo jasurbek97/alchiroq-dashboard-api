@@ -21,7 +21,7 @@ export function calculateRevenue(list: any, amount = 0): number {
       case '0007123':
         amount += sumBy(list[item], 'count') * 2000;
       case '0007124':
-        amount += sumBy(list[item], 'count') * 1000;
+        amount += sumBy(list[item], 'count') * 3000;
     }
   });
   return Math.floor((amount * 0.85) / 2);
