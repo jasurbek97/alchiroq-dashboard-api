@@ -1,9 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { groupBy } from 'lodash';
 import { Model } from 'mongoose';
 import { getRepository } from 'typeorm';
 import { NODE_ENV } from '../../environments/index';
-import { formatDate } from '../../utils/index';
+import {
+  calculateRevenue,
+  endOfMonth,
+  formatDate,
+  startOfMonth,
+} from '../../utils/index';
 import { ChargeEntity } from './entities/charge.entity';
 import { ChargeInterface } from './interfaces/charge.interface';
 import { Charge, ChargeDocument } from './schemas/charge.schema';
@@ -20,6 +26,18 @@ export class ChargeService {
       .select('tariff date status count')
       .sort({ date: -1 })
       .exec();
+  }
+
+  async revenue(): Promise<number> {
+    const charges = await this.chargeModel
+      .find({
+        status: 'ESME_ROK',
+        date: { $gte: startOfMonth, $lte: endOfMonth },
+      })
+      .select('tariff count')
+      .exec();
+    const revenue = groupBy(charges, 'tariff');
+    return calculateRevenue(revenue);
   }
 
   async findByTariff(tariff: string): Promise<any> {

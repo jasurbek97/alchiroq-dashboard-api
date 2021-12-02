@@ -15,6 +15,20 @@ export class ChargeController {
     return this.chargeService.findAll();
   }
 
+  @ApiOperation({ summary: 'Calculate revenue 🧮' })
+  @Get('/revenue')
+  revenue(): Promise<number> {
+    return this.chargeService.revenue();
+  }
+
+  @ApiOperation({ summary: 'Cache charges 🟢' })
+  @ApiBody({ type: ChargeCacheRequest })
+  @Post('/cache')
+  cache(@Body() request: ChargeCacheRequest) {
+    const { dates, sign } = request;
+    return this.chargeService.cache(dates, sign);
+  }
+
   @ApiOperation({ summary: 'Get all charges 🟢' })
   @ApiParam({
     name: 'tariff',
@@ -35,14 +49,6 @@ export class ChargeController {
   @Get('/:tariff')
   findByTariff(@Param('tariff') tariff: string) {
     return this.chargeService.findByTariff(tariff);
-  }
-
-  @ApiOperation({ summary: 'Cache charges 🟢' })
-  @ApiBody({ type: ChargeCacheRequest })
-  @Post('/cache')
-  cache(@Body() request: ChargeCacheRequest) {
-    const { dates, sign } = request;
-    return this.chargeService.cache(dates, sign);
   }
 
   @ApiOperation({ summary: 'Delete all charges 🔴' })
