@@ -17,7 +17,7 @@ export class ChargeController {
 
   @ApiOperation({ summary: 'Calculate revenue 🧮' })
   @Get('/revenue')
-  revenue(): Promise<number> {
+  revenue(): Promise<any> {
     return this.chargeService.revenue();
   }
 
