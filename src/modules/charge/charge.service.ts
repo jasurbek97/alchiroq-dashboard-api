@@ -63,6 +63,7 @@ export class ChargeService {
     return await this.chargeModel
       .find({ tariff: tariff, date: formatDate(new Date()) })
       .select('status count')
+      .sort({ status: -1 })
       .exec();
   }
 
