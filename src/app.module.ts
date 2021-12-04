@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { MongooseConfigService } from './configs';
 import { TypeOrmConfigService } from './configs/typeorm/index';
 import { ChargeModule } from './modules/charge/charge.module';
+import { DeviceModule } from './modules/device/device.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ChargeModule } from './modules/charge/charge.module';
       useClass: MongooseConfigService,
     }),
     ChargeModule,
+    DeviceModule,
   ],
   controllers: [AppController],
   providers: [
