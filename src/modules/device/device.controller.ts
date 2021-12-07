@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Delete, Get } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { DeviceService } from './device.service';
 
@@ -11,5 +11,11 @@ export class DeviceController {
   @Get()
   async findAll() {
     return await this.deviceService.findAll();
+  }
+
+  @ApiOperation({ summary: 'Delete all devices 📱' })
+  @Delete()
+  delete() {
+    return this.deviceService.delete();
   }
 }

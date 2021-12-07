@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { getConnection } from 'typeorm';
+import { NODE_ENV } from '../../environments/index';
 import { DeviceEntity } from './entities/device.entity';
 import { DeviceInterface } from './interfaces/device.interface';
 import { Device, DeviceDocument } from './schemas/device.schema';
@@ -45,9 +46,9 @@ export class DeviceService {
   }
 
   createOrUpdate(item: DeviceInterface) {
-    const { device, count } = item;
+    const { device } = item;
     return this.deviceModel.findOneAndUpdate(
-      { device, count },
+      { device },
       item,
       { upsert: true },
       function (err, doc) {
@@ -70,5 +71,11 @@ export class DeviceService {
         console.log('All devices cached');
       });
     });
+  }
+
+  delete() {
+    return NODE_ENV === 'dev'
+      ? this.deviceModel.deleteMany()
+      : 'APP in Production';
   }
 }

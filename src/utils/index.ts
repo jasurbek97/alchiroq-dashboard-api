@@ -8,6 +8,7 @@ export function formatDate(date: Date) {
 
 export const startOfMonth = formatDate(moment().startOf('month').toDate());
 export const endOfMonth = formatDate(moment().endOf('month').toDate());
+export const oneMonthAgo = formatDate(moment().subtract(1, 'months').toDate());
 
 export function calculateRevenue(list: any): number {
   const result = {};

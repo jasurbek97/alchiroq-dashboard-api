@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
+import { ActivityEntity } from '../../modules/activity/entities/activity.entity';
 import { ChargeEntity } from '../../modules/charge/entities/charge.entity';
 import { DeviceEntity } from '../../modules/device/entities/device.entity';
+import { UserEntity } from '../../modules/user/entities/user.entity';
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
@@ -28,6 +30,30 @@ export const DeviceOptions: TypeOrmModuleOptions = {
   password: process.env.DEVICEPASS,
   database: process.env.DEVICEDB,
   entities: [DeviceEntity],
+  synchronize: false,
+  useUTC: true,
+};
+
+export const AppUserOptions: TypeOrmModuleOptions = {
+  type: 'postgres',
+  host: process.env.APPUSERHOST,
+  port: +process.env.APPUSERPORT,
+  username: process.env.APPUSERDBUSER,
+  password: process.env.APPUSERDBPASS,
+  database: process.env.APPUSERDB,
+  entities: [UserEntity],
+  synchronize: false,
+  useUTC: true,
+};
+
+export const appLogOptions: TypeOrmModuleOptions = {
+  type: 'postgres',
+  host: process.env.LOGINHOST,
+  port: +process.env.LOGPORT,
+  username: process.env.LOGDBUSER,
+  password: process.env.LOGDBPASS,
+  database: process.env.LOGDB,
+  entities: [ActivityEntity],
   synchronize: false,
   useUTC: true,
 };

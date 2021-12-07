@@ -9,6 +9,8 @@ import { MongooseConfigService } from './configs';
 import { TypeOrmConfigService } from './configs/typeorm/index';
 import { ChargeModule } from './modules/charge/charge.module';
 import { DeviceModule } from './modules/device/device.module';
+import { UserModule } from './modules/user/user.module';
+import { ActivityModule } from './modules/activity/activity.module';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { DeviceModule } from './modules/device/device.module';
     }),
     ChargeModule,
     DeviceModule,
+    UserModule,
+    ActivityModule,
   ],
   controllers: [AppController],
   providers: [
