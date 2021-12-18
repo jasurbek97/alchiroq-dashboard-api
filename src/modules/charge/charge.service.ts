@@ -44,15 +44,11 @@ export class ChargeService {
     const dateFrom = formatDate(
       new Date(date.getFullYear(), date.getMonth() - 1, date.getDate()),
     );
-    const dateTo = formatDate(
-      new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1),
-    );
     const charges = await this.chargeModel
       .find({
         tariff: tariff,
         date: {
           $gte: dateFrom,
-          $lt: dateTo,
         },
       })
       .select('date status count')
