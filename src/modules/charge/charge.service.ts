@@ -40,11 +40,23 @@ export class ChargeService {
   }
 
   async findByTariff(tariff: string): Promise<any> {
+    const date = new Date();
+    const dateFrom = formatDate(
+      new Date(date.getFullYear(), date.getMonth() - 1, date.getDate()),
+    );
+    const dateTo = formatDate(new Date());
     const charges = await this.chargeModel
-      .find({ tariff: tariff })
+      .find({
+        tariff: tariff,
+        date: {
+          $gte: dateFrom,
+          $lt: dateTo,
+        },
+      })
       .select('date status count')
       .sort({ date: 'asc' })
       .exec();
+
     const dates = [];
     const charged = [];
     const uncharged = [];

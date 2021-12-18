@@ -7,4 +7,7 @@ export class ActivityEntity {
 
   @Column({ type: 'timestamp', nullable: true })
   created_at: Date;
+
+  @Column({ type: 'varchar', nullable: true })
+  action: string;
 }

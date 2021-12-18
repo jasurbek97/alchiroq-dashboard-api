@@ -48,10 +48,10 @@ export const AppUserOptions: TypeOrmModuleOptions = {
 
 export const appLogOptions: TypeOrmModuleOptions = {
   type: 'postgres',
-  host: process.env.LOGINHOST,
+  host: process.env.LOGHOST,
   port: +process.env.LOGPORT,
-  username: process.env.LOGDBUSER,
-  password: process.env.LOGDBPASS,
+  username: process.env.LOGUSER,
+  password: process.env.LOGPASS,
   database: process.env.LOGDB,
   entities: [ActivityEntity],
   synchronize: false,
