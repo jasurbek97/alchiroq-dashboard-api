@@ -44,7 +44,9 @@ export class ChargeService {
     const dateFrom = formatDate(
       new Date(date.getFullYear(), date.getMonth() - 1, date.getDate()),
     );
-    const dateTo = formatDate(new Date());
+    const dateTo = formatDate(
+      new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1),
+    );
     const charges = await this.chargeModel
       .find({
         tariff: tariff,
@@ -69,6 +71,32 @@ export class ChargeService {
       charged: charged,
       uncharged: uncharged,
     };
+  }
+
+  async findByAllTariffs({ from, to }) {
+    const charges = await this.chargeModel
+      .find({
+        date: {
+          $gte: from,
+          $lt: to,
+        },
+      })
+      .select('date status count tariff')
+      .sort({ date: 'asc' })
+      .exec();
+    return charges;
+    // const dates = [];
+    // const charged = [];
+    // const uncharged = [];
+    // charges.forEach(({ date, status, count }) => {
+    //   if (!dates.includes(date)) dates.push(date);
+    //   status === 'CREATED' ? uncharged.push(count) : charged.push(count);
+    // });
+    // return {
+    //   dates: dates,
+    //   charged: charged,
+    //   uncharged: uncharged,
+    // };
   }
 
   async findByTariffToday(tariff: string): Promise<Charge[]> {

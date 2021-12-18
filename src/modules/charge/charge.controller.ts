@@ -1,7 +1,16 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { ChargeService } from './charge.service';
 import { ChargeCacheRequest } from './dto/charge.cache';
+import { FindAllTariffsRequest } from './dto/find-all-tariffs.dto';
 import { TariffEnum } from './enums/tariff.enum';
 
 @ApiTags('CHARGE')
@@ -38,6 +47,14 @@ export class ChargeController {
   @Get('/today/:tariff')
   findByTariffToday(@Param('tariff') tariff: string) {
     return this.chargeService.findByTariffToday(tariff);
+  }
+
+  @ApiOperation({ summary: 'Get all charges by tariffs 🟢' })
+  @ApiBody({ type: FindAllTariffsRequest })
+  @Post('/filter')
+  @HttpCode(200)
+  findByAllTariffs(@Body() request: FindAllTariffsRequest) {
+    return this.chargeService.findByAllTariffs(request);
   }
 
   @ApiOperation({ summary: 'Get all charges 🟢' })
