@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { filter, groupBy } from 'lodash';
 import { Model } from 'mongoose';
 import { getRepository } from 'typeorm';
 import { NODE_ENV } from '../../environments/index';
@@ -78,21 +79,85 @@ export class ChargeService {
         },
       })
       .select('date status count tariff')
-      .sort({ date: 'asc' })
+      .sort({ date: -1 })
       .exec();
-    return charges;
-    // const dates = [];
-    // const charged = [];
-    // const uncharged = [];
-    // charges.forEach(({ date, status, count }) => {
-    //   if (!dates.includes(date)) dates.push(date);
-    //   status === 'CREATED' ? uncharged.push(count) : charged.push(count);
-    // });
-    // return {
-    //   dates: dates,
-    //   charged: charged,
-    //   uncharged: uncharged,
-    // };
+
+    const dates = Object.keys(groupBy(charges, 'date'));
+    return dates.map((item) => {
+      return {
+        date: item,
+        '0007120': {
+          CHARGED:
+            filter(charges, {
+              date: item,
+              tariff: '0007120',
+              status: 'ESME_ROK',
+            })[0]?.count ?? 0,
+          UNCHARGED:
+            filter(charges, {
+              date: item,
+              tariff: '0007120',
+              status: 'CREATED',
+            })[0]?.count ?? 0,
+        },
+        '0007121': {
+          CHARGED:
+            filter(charges, {
+              date: item,
+              tariff: '0007121',
+              status: 'ESME_ROK',
+            })[0]?.count ?? 0,
+          UNCHARGED:
+            filter(charges, {
+              date: item,
+              tariff: '0007121',
+              status: 'CREATED',
+            })[0]?.count ?? 0,
+        },
+        '0007122': {
+          CHARGED:
+            filter(charges, {
+              date: item,
+              tariff: '0007122',
+              status: 'ESME_ROK',
+            })[0]?.count ?? 0,
+          UNCHARGED:
+            filter(charges, {
+              date: item,
+              tariff: '0007122',
+              status: 'CREATED',
+            })[0]?.count ?? 0,
+        },
+        '0007123': {
+          CHARGED:
+            filter(charges, {
+              date: item,
+              tariff: '0007123',
+              status: 'ESME_ROK',
+            })[0]?.count ?? 0,
+          UNCHARGED:
+            filter(charges, {
+              date: item,
+              tariff: '0007123',
+              status: 'CREATED',
+            })[0]?.count ?? 0,
+        },
+        '0007124': {
+          CHARGED:
+            filter(charges, {
+              date: item,
+              tariff: '0007124',
+              status: 'ESME_ROK',
+            })[0]?.count ?? 0,
+          UNCHARGED:
+            filter(charges, {
+              date: item,
+              tariff: '0007124',
+              status: 'CREATED',
+            })[0]?.count ?? 0,
+        },
+      };
+    });
   }
 
   async findByTariffToday(tariff: string): Promise<Charge[]> {
