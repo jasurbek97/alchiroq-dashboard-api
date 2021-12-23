@@ -3,6 +3,7 @@ import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { ActivityEntity } from '../../modules/activity/entities/activity.entity';
 import { ChargeEntity } from '../../modules/charge/entities/charge.entity';
 import { DeviceEntity } from '../../modules/device/entities/device.entity';
+import { TournamentTransaction } from '../../modules/tournament-transaction/entities/tournament-transaction.entity';
 import { UserEntity } from '../../modules/user/entities/user.entity';
 
 @Injectable()
@@ -54,6 +55,18 @@ export const appLogOptions: TypeOrmModuleOptions = {
   password: process.env.LOGPASS,
   database: process.env.LOGDB,
   entities: [ActivityEntity],
+  synchronize: false,
+  useUTC: true,
+};
+
+export const tournamentTransactionOptions: TypeOrmModuleOptions = {
+  type: 'postgres',
+  host: process.env.TURTRANSHOST,
+  port: +process.env.TURTRANSPORT,
+  username: process.env.TURTRANSUSER,
+  password: process.env.TURTRANSPASS,
+  database: process.env.TURTRANSDB,
+  entities: [TournamentTransaction],
   synchronize: false,
   useUTC: true,
 };

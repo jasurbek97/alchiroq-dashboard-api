@@ -11,6 +11,7 @@ import { ChargeModule } from './modules/charge/charge.module';
 import { DeviceModule } from './modules/device/device.module';
 import { UserModule } from './modules/user/user.module';
 import { ActivityModule } from './modules/activity/activity.module';
+import { TournamentTransactionModule } from './modules/tournament-transaction/tournament-transaction.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { ActivityModule } from './modules/activity/activity.module';
     DeviceModule,
     UserModule,
     ActivityModule,
+    TournamentTransactionModule,
   ],
   controllers: [AppController],
   providers: [
