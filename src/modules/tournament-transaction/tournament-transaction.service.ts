@@ -157,10 +157,10 @@ export class TournamentTransactionService {
     return {
       date: Object.keys(series),
       series: [
-        { name: 'Paket: 3', date: this.series(tariff500, series) },
-        { name: 'Paket: 6', date: this.series(tariff900, series) },
-        { name: 'Paket: 9', date: this.series(tariff1300, series) },
-        { name: 'Paket: 12', date: this.series(tariff1700, series) },
+        { name: 'Paket: 3', data: this.series(tariff500, series) },
+        { name: 'Paket: 6', data: this.series(tariff900, series) },
+        { name: 'Paket: 9', data: this.series(tariff1300, series) },
+        { name: 'Paket: 12', data: this.series(tariff1700, series) },
       ],
     };
   }
