@@ -15,6 +15,12 @@ export class TournamentTransactionController {
     return this.tournamentTransactionService.findAll();
   }
 
+  @ApiOperation({ summary: 'Get all tournament by tariff 🟢' })
+  @Get('paket')
+  transactionByTariff() {
+    return this.tournamentTransactionService.transactionByTariff();
+  }
+
   @ApiOperation({ summary: 'Cache all tournament 🟢' })
   @Get('/cache')
   cache() {

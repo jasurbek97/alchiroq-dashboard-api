@@ -29,3 +29,14 @@ export function calculateRevenue(list: any): number {
   const totalCount = sum(totalCounters);
   return Math.floor((totalCount * 0.85) / 2);
 }
+
+export function dateRange(): any {
+  const fromDate = moment().subtract(1, 'months').toDate();
+  const toDate = moment().toDate();
+  const dates = {};
+
+  for (let day = fromDate; day <= toDate; day.setDate(day.getDate() + 1)) {
+    dates[formatDate(day)] = 0;
+  }
+  return dates;
+}
