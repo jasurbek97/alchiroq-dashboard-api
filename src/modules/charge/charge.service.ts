@@ -37,6 +37,7 @@ export class ChargeService {
       .select('tariff date count')
       .sort({ tariff: 'asc' })
       .exec();
+
     return calculateRevenue(charges);
   }
 

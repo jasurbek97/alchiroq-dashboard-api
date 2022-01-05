@@ -10,7 +10,7 @@ export const startOfMonth = formatDate(moment().startOf('month').toDate());
 export const endOfMonth = formatDate(moment().endOf('month').toDate());
 export const oneMonthAgo = formatDate(moment().subtract(1, 'months').toDate());
 
-export function calculateRevenue(list: any): number {
+export function calculateRevenue(list: any): any {
   const result = {};
   const tariffs = {
     '0007120': 200,
@@ -31,8 +31,8 @@ export function calculateRevenue(list: any): number {
 }
 
 export function dateRange(): any {
-  const fromDate = moment().subtract(1, 'months').toDate();
-  const toDate = moment().toDate();
+  const fromDate = moment().tz(TIMEZONE).subtract(1, 'months').toDate();
+  const toDate = moment().tz(TIMEZONE).toDate();
   const dates = {};
 
   for (let day = fromDate; day <= toDate; day.setDate(day.getDate() + 1)) {
