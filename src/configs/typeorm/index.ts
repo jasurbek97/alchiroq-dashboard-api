@@ -4,6 +4,7 @@ import { ActivityEntity } from '../../modules/activity/entities/activity.entity'
 import { ChargeEntity } from '../../modules/charge/entities/charge.entity';
 import { DeviceEntity } from '../../modules/device/entities/device.entity';
 import { TournamentTransaction } from '../../modules/tournament-transaction/entities/tournament-transaction.entity';
+import { TgUserEntity } from '../../modules/user/entities/tg-user.entity';
 import { UserEntity } from '../../modules/user/entities/user.entity';
 
 @Injectable()
@@ -43,6 +44,18 @@ export const AppUserOptions: TypeOrmModuleOptions = {
   password: process.env.APPUSERDBPASS,
   database: process.env.APPUSERDB,
   entities: [UserEntity],
+  synchronize: false,
+  useUTC: true,
+};
+
+export const TgUserOptions: TypeOrmModuleOptions = {
+  type: 'postgres',
+  host: process.env.TGUSERHOST,
+  port: +process.env.TGUSERPORT,
+  username: process.env.TGUSERDBUSER,
+  password: process.env.TGUSERDBPASS,
+  database: process.env.TGUSERDB,
+  entities: [TgUserEntity],
   synchronize: false,
   useUTC: true,
 };

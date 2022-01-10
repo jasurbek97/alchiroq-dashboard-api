@@ -7,11 +7,18 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @ApiOperation({ summary: 'Get all users 🧑' })
+  @ApiOperation({ summary: 'Get all APP users 🧑' })
   @Get()
-  findAll() {
+  findUserCount() {
     return this.userService.findAll();
   }
+
+  //
+  // @ApiOperation({ summary: 'Get all TG users 🧑' })
+  // @Get('/tg')
+  // findTgUserCount() {
+  //   return this.userService.cacheTgUser();
+  // }
 
   @ApiOperation({ summary: 'Delete all users 🧑' })
   @Delete()
